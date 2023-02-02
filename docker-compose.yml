@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  server:
+    container_name: "mvc-server"
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    tty: true
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/go/src/github.com/mahiro72/go-mvc-server
+  db:
+    container_name: "mvc-db"
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    tty: true
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
