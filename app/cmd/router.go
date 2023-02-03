@@ -12,7 +12,7 @@ import (
 
 type IRouter interface {
 	Serve() error
-	SetMiddlewares(middlewares ...func(next http.Handler) http.Handler)
+	SetMiddlewares()
 }
 
 type ChiRouter struct {
@@ -27,7 +27,7 @@ func NewChiRouterImpl(port string) IRouter {
 	}
 }
 
-func (r *ChiRouter) SetMiddlewares(middlewares ...func(next http.Handler) http.Handler) {
+func (r *ChiRouter) SetMiddlewares() {
 	r.setMiddlewares(middleware.Logger, middleware.Recoverer)
 }
 
