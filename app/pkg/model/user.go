@@ -9,8 +9,7 @@ type User struct {
 
 func GetUser(id int) (*User, error) {
 	var user User
-	err := persistence.DB.Where("id = ?", id).First(&user).Error
-	if err != nil {
+	if err := persistence.DB.Where("id = ?", id).First(&user).Error;err != nil {
 		return nil, err
 	}
 	return &user, nil
@@ -18,8 +17,7 @@ func GetUser(id int) (*User, error) {
 
 func CreateUser(name string) (*User, error) {
 	user := &User{Name: name}
-	err := persistence.DB.Create(user).Error
-	if err != nil {
+	if err := persistence.DB.Create(user).Error;err != nil {
 		return nil, err
 	}
 	return user, nil
