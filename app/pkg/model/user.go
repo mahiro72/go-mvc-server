@@ -11,12 +11,18 @@ type User struct {
 
 func GetUser(id int) (*User,error) {
 	var user User
-	database.DB.First(user).Where("id = ?",id)
+	err := database.DB.Where("id = ?",id).First(&user).Error
+	if err != nil {
+		return nil,err
+	}
 	return &user,nil
 }
 
 func CreateUser(name string) (*User,error) {
 	user := &User{Name: name}
-	database.DB.Create(user)
+	err := database.DB.Create(user).Error
+	if err != nil {
+		return nil,err
+	}
 	return user,nil
 }

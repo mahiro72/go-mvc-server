@@ -1,13 +1,23 @@
 .PHONY: up
-up: check-env ## docker compose環境を立ち上げる
-	docker-compose up -d
+up: check-env ## docker環境を立ち上げる
+	docker-compose -f docker-compose.yml up -d --build
 
 .PHONY: down
-down: ## docker compose環境を閉じる
-	docker-compose down
+down: ## docker環境を閉じる
+	docker-compose -f docker-compose.yml down
+
+.PHONY: fclean
+fclean: down del-volumes
+
+.PHONY: re
+re: fclean up ## volumesを削除してdocker環境を立ち上げる
+
+.PHONY: del-volumes
+del-volumes:
+	rm -rf ./db/mysql
 
 .PHONY: log
-log: ## docker compose環境のログを標示する
+log: ## docker環境のログを標示する
 	docker-compose logs -f
 
 .PHONY: check-env

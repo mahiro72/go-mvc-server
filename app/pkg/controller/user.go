@@ -3,14 +3,21 @@ package controller
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/mahiro72/go-mvc-server/pkg/model"
 	"github.com/mahiro72/go-mvc-server/pkg/view"
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	idQuery := r.URL.Query().Get("id")
-	user,err := model.GetUser(idQuery)
+	idParamString := chi.URLParam(r,"id")
+	idParam,err := strconv.Atoi(idParamString)
+	if err != nil {
+		http.Error(w,err.Error(),http.StatusBadRequest)
+		return
+	}
+	user,err := model.GetUser(idParam)
 	if err != nil {
 		http.Error(w,err.Error(),http.StatusBadRequest)
 		return
