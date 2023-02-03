@@ -51,6 +51,7 @@ func (r *ChiRouter) registerRouters(routers ...func()) {
 func (r *ChiRouter) userRouter() {
 	r.mux.Route("/users", func(r chi.Router) {
 		r.Get("/{id}", controller.GetUser)
+		r.Post("/", controller.CreateUser)
 	})
 }
 
