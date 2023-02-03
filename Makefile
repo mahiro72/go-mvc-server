@@ -14,7 +14,7 @@ re: fclean up ## volumesを削除してdocker環境を立ち上げる
 
 .PHONY: del-volumes
 del-volumes:
-	rm -rf ./db/mysql
+	rm -rf ./docker/db/mysql
 
 .PHONY: log
 log: ## docker環境のログを標示する
@@ -27,6 +27,8 @@ check-env:
 .PHONY: app-fmt
 app-fmt: ## appディレクトリ配下のgoのコードを整形します
 	gofmt -l -w .
+
+
 
 .PHONY: help
 help: ## helpを表示する

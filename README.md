@@ -14,6 +14,12 @@ docker環境が立ち上がったら、http://localhost:8080/health にアクセ
 
 okとでれば問題ないです。
 
+## Check
+
+動作確認は以下を参考にしてください。
+
+
+
 ## Tips
 
 ### makeについて

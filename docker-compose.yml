@@ -2,10 +2,10 @@ version: '3'
 
 services:
   server:
-    container_name: "mvc-server"
+    container_name: mvc-server
     build:
       context: ./app
-      dockerfile: dev.Dockerfile
+      dockerfile: ../docker/server/dev/Dockerfile #memo: dockerfileはcontextからの相対パス
     tty: true
     restart: always
     env_file:
@@ -14,11 +14,13 @@ services:
       - 8080:8080
     volumes:
       - ./app:/go/src/github.com/mahiro72/go-mvc-server
+    depends_on:
+      - db
   db:
-    container_name: "mvc-db"
+    container_name: mvc-db
     build:
-      context: ./db
-      dockerfile: Dockerfile
+      context: ./app/db
+      dockerfile: ../../docker/db/dev/Dockerfile
     tty: true
     restart: always
     env_file:
@@ -26,5 +28,5 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./db/mysql:/var/lib/mysql
-      - ./db/init:/docker-entrypoint-initdb.d
+      - ./docker/db/dev/mysql:/var/lib/mysql
+      - ./docker/db/dev/initdb.d:/docker-entrypoint-initdb.d

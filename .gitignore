@@ -1,6 +1,5 @@
 /.env
 
-# data
-/db/mysql
-
 /app/tmp
+
+/docker/db/dev/mysql

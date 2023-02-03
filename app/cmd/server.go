@@ -6,8 +6,8 @@ import (
 
 func main() {
 	port := "8080"
-	r := NewChiRouter(port)
-	if err := r.InitRouter(); err != nil {
+	r := NewChiRouterImpl(port)
+	if err := r.Serve(); err != nil {
 		panic(fmt.Sprintf("error: failed to InitRouter: %s", err.Error()))
 	}
 }
