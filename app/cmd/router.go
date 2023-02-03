@@ -5,12 +5,14 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 
 	"github.com/mahiro72/go-mvc-server/pkg/controller"
 )
 
 type IRouter interface {
 	Serve() error
+	SetMiddlewares(middlewares ...func(next http.Handler) http.Handler)
 }
 
 type ChiRouter struct {
@@ -22,6 +24,16 @@ func NewChiRouterImpl(port string) IRouter {
 	return &ChiRouter{
 		mux:  chi.NewRouter(),
 		port: fmt.Sprintf(":%s", port),
+	}
+}
+
+func (r *ChiRouter) SetMiddlewares(middlewares ...func(next http.Handler) http.Handler) {
+	r.setMiddlewares(middleware.Logger,middleware.Recoverer)
+}
+
+func (r *ChiRouter) setMiddlewares(middlewares ...func(next http.Handler) http.Handler) {
+	for _,middleware := range middlewares {
+		r.mux.Use(middleware)
 	}
 }
 
