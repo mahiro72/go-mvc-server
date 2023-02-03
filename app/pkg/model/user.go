@@ -9,20 +9,20 @@ type User struct {
 	Name string
 }
 
-func GetUser(id int) (*User,error) {
+func GetUser(id int) (*User, error) {
 	var user User
-	err := database.DB.Where("id = ?",id).First(&user).Error
+	err := database.DB.Where("id = ?", id).First(&user).Error
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
-	return &user,nil
+	return &user, nil
 }
 
-func CreateUser(name string) (*User,error) {
+func CreateUser(name string) (*User, error) {
 	user := &User{Name: name}
 	err := database.DB.Create(user).Error
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
-	return user,nil
+	return user, nil
 }

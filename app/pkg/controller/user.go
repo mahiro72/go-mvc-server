@@ -11,20 +11,20 @@ import (
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	idParamString := chi.URLParam(r,"id")
-	idParam,err := strconv.Atoi(idParamString)
+	idParamString := chi.URLParam(r, "id")
+	idParam, err := strconv.Atoi(idParamString)
 	if err != nil {
-		http.Error(w,err.Error(),http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	user,err := model.GetUser(idParam)
+	user, err := model.GetUser(idParam)
 	if err != nil {
-		http.Error(w,err.Error(),http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	userJson := view.UserToJSON(user)
-	if err := json.NewEncoder(w).Encode(userJson);err!=nil{
-		http.Error(w,err.Error(),http.StatusBadRequest)
+	if err := json.NewEncoder(w).Encode(userJson); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
@@ -32,19 +32,19 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	var j view.UserJSON
-	if err := json.NewDecoder(r.Body).Decode(&j);err!=nil{
-		http.Error(w,err.Error(),http.StatusBadRequest)
+	if err := json.NewDecoder(r.Body).Decode(&j); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	defer r.Body.Close()
-	user,err := model.CreateUser(j.Name)
+	user, err := model.CreateUser(j.Name)
 	if err != nil {
-		http.Error(w,err.Error(),http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	userJson := view.UserToJSON(user)
-	if err := json.NewEncoder(w).Encode(userJson);err!=nil{
-		http.Error(w,err.Error(),http.StatusBadRequest)
+	if err := json.NewEncoder(w).Encode(userJson); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	w.WriteHeader(http.StatusOK)

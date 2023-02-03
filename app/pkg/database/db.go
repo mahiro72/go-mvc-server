@@ -25,7 +25,7 @@ func init() {
 		"mvc-db",
 		MYSQL_DATABASE,
 	)
-	DB,err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
