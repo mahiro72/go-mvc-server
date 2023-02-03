@@ -24,6 +24,10 @@ log: ## docker環境のログを標示する
 check-env:
 	./scripts/check-env.sh
 
+.PHONY: app-fmt
+app-fmt: ## appディレクトリ配下のgoのコードを整形します
+	gofmt -l -w .
+
 .PHONY: help
 help: ## helpを表示する
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
