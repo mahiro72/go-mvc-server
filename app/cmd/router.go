@@ -28,11 +28,11 @@ func NewChiRouterImpl(port string) IRouter {
 }
 
 func (r *ChiRouter) SetMiddlewares(middlewares ...func(next http.Handler) http.Handler) {
-	r.setMiddlewares(middleware.Logger,middleware.Recoverer)
+	r.setMiddlewares(middleware.Logger, middleware.Recoverer)
 }
 
 func (r *ChiRouter) setMiddlewares(middlewares ...func(next http.Handler) http.Handler) {
-	for _,middleware := range middlewares {
+	for _, middleware := range middlewares {
 		r.mux.Use(middleware)
 	}
 }
