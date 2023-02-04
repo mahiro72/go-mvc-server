@@ -14,6 +14,30 @@ docker環境が立ち上がったら、http://localhost:8080/health にアクセ
 
 okとでれば問題ないです。
 
+## ディレクトリ
+
+```
+|--.gitignore
+|--.sample.env
+|--app
+|  |--.air.toml
+|  |--cmd                // ここからサーバーを起動します
+|  |--db
+|  |  |--migrations      // migrationsファイルがまとめてあります
+|  |--go.mod
+|  |--go.sum
+|  |--pkg
+|  |  |--controller      // modelとviewを呼び出します、またcmd配下のハンドラーと対応しています
+|  |  |--model           // ドメインオブジェクトの管理やpersistanceを呼び出しデータを保存します
+|  |  |--persistence     // データの永続化を責務とする
+|  |  |--view            // Goの構造体をJSON形式に変更する
+|--docker                // dev,prodのDockerfileがまとめてあります
+|--docker-compose.yml
+|--Makefile              // プロジェクトに関するコマンドがまとめてあります
+|--README.md
+|--scripts               // Makefileから実行するスクリプトがあります
+```
+
 
 ## Tips
 
