@@ -14,6 +14,8 @@ docker環境が立ち上がったら、http://localhost:8080/health にアクセ
 
 okとでれば問題ないです。
 
+またこのタイミングで`docker/db/dev/initdb.d`が実行されdummy dataがdbに入ります。
+
 ## ディレクトリ
 
 ```
