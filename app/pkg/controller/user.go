@@ -12,8 +12,7 @@ import (
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	idParamString := chi.URLParam(r, "id")
-	idParam, err := strconv.Atoi(idParamString)
+	idParam, err := strconv.Atoi(chi.URLParam(r, "id"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
