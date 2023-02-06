@@ -31,7 +31,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
-	var j view.UserJSON
+	var j view.User
 	if err := json.NewDecoder(r.Body).Decode(&j); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
