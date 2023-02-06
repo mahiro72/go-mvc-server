@@ -3,7 +3,7 @@ package model
 import "github.com/mahiro72/go-mvc-server/pkg/persistence"
 
 type User struct {
-	Id   int
+	ID   int
 	Name string
 }
 
