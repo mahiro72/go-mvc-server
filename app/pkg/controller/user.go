@@ -37,6 +37,10 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer r.Body.Close()
+	if j.Name == "" {
+		http.Error(w, "error: name is empty", http.StatusBadRequest)
+		return
+	}
 	user, err := model.CreateUser(j.Name)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
