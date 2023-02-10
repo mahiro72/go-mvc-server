@@ -1,0 +1,5 @@
+/.env
+
+/app/tmp
+
+/docker/db/dev/mysql
